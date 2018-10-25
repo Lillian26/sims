@@ -348,12 +348,8 @@ $(document).ready(function () {
                        console.log(data);
                        $(".details-student").html(data);
                         $( ".show-fa" ).removeClass( "fa fa-spinner fa-spin" ).addClass("fa fa-download" );
-    
                     }
                 });
             }
-
-			
 		});
-
 });
