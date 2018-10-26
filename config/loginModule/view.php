@@ -1,8 +1,8 @@
 <?php
 function auth(){
-include_once 'config/real-config.php';
-include_once 'config/config-func.php';
-include 'config/focus.php';
+include_once 'config/authModule/real-config.php';
+include_once 'config/loginModule/login-func.php';
+include 'config/recordsModule/focus.php';
 session_start(); // Our custom secure way of starting a PHP session.
   ?>
   <body class="hold-transition login-page">
@@ -45,16 +45,15 @@ session_start(); // Our custom secure way of starting a PHP session.
 
   </div>
   <?php
-  include_once 'config/sh-config.php';
+  include_once 'config/authModule/sh-config.php';
   session_start(); // Our custom secure way of starting a PHP session.
- 
   if (isset($_POST['username'], $_POST['p'])) {
       $username = $_POST['username'];
       $password = $_POST['p']; // The hashed password.
    
       if (login($username, $password, $mysqli) == true) {
           // Login success 
-          header('Location: ./pages/dash.php?token=bWFuYWdlVXNlcnM=');
+          header('Location: ./pages/dash.php?token=ZGFzaGJvYXJk');
       } else {
           // Login failed 
           $msg = msg_error('Login Failed','Wrong Password or Username. Please Try Again');
@@ -75,18 +74,32 @@ session_start(); // Our custom secure way of starting a PHP session.
   <?php
   include_once 'config/focus.php';
   if (isset($_POST['new_institute'])) {
+    include 'config/real-config.php';
       $institute_name = $_POST['institution_name'];
       $username = $_POST['username'];
       $password = $_POST['p']; // The hashed password.
       $email = $_POST['email'];
       $phone_no = $_POST['phone'];
       $key = $_POST['key'];
-      if (new_institution($institute_name,$username, $password, $email, $phone_no,$key)== true){
-          msg_success("Operation Successful","Proceed to Login");
+      $password_hash = password_hash($password,PASSWORD_DEFAULT);
+      $timestamp = date('H:m:s');
+      $instNo = rand(1000,5000);
+      $usraccNo = rand(6000,8000);
+      if(check_inst($institute_name) == false){
+          if(check_serial($key) == true){
+              if(new_institution($institute_name,$instNo,$usraccNo,$username, $password_hash, $email, $phone_no,$key,$timestamp,$mysqli) == true){
+                msg_success('Operation Successful', 'Please proceed to login');
+              }else{
+                msg_error('Operation Failed', 'An error occured');
+              }
+          }else{
+               msg_error('Operation Failed', 'Invalid Serial Key');
+          }
       }else{
-          msg_error("Operation Failed","An Error Occured");
-      }
-  }
+             msg_error('Operation Failed', 'Institute Name Already Exists');
+       }
+    }
+            
 ?>
   <div class="register-box-body">
     <p class="login-box-msg">Register Institution</p>
@@ -103,12 +116,12 @@ session_start(); // Our custom secure way of starting a PHP session.
       </div>
       <div class="form-group has-feedback">
         <label>Password</label>
-        <input type="text" class="form-control" name="p" required>
+        <input type="password" class="form-control" name="p" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <label>Re-type Password</label>
-        <input type="text" class="form-control" name="rp">
+        <input type="password" class="form-control" name="rp">
         <span class="glyphicon glyphicon-lock form-control-feedback" required></span>
       </div>
       <div class="form-group has-feedback">

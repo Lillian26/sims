@@ -52,7 +52,7 @@ function getStudents($Programme,$year,$intake) {
   
 /* Inserting a  Department */
 function insert_marks(){
-    include '../login/login-func.php';
+    include '../loginModule/login-func.php';
     $mysqli = con();
     $Programme = $_POST['Programme'];
     $intake = $_POST['intake'];

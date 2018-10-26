@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
 
-include "config/login/view.php";
+include "config/loginModule/view.php";
 //nclude "focus.php";
 
 if (isset($_REQUEST['this'])){
