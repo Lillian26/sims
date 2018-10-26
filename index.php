@@ -29,7 +29,7 @@
 </head>
 
 <?php
-include 'config/login/route.php';
+include 'config/loginModule/route.php';
 ?>
   <!-- /.login-box-body -->
 

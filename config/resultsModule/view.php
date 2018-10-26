@@ -3,7 +3,7 @@
  * FUNCTIONS FOR MARKS ENTRY
  */
    function entermarks(){
-    include './config/real-config.php';
+    include '../config/authModule/real-config.php';
     $user = getfield('fname',$mysqli);
   ?>
     <!-- Content Header (Page header) -->
@@ -65,7 +65,7 @@
                                             <select name="Programme" class="form-control Programme">
                                                 <?php
                                             $query = "SELECT * FROM  programme;";
-                                            include './config/real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -220,7 +220,7 @@ function singleResult(){
                                         <select name="allstudents" class="form-control allstudents">
                                             <?php
                                             $query = "SELECT * FROM  student";
-                                            include './config/real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);

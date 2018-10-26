@@ -7,8 +7,8 @@
   <?php 
 session_start(); 
 ob_start();
-   include_once '../config/real-config.php';
-  include_once '../config/login/login-func.php';
+   include_once '../config/authModule/real-config.php';
+  include_once '../config/loginModule/login-func.php';
 ?>
   <?php
           
@@ -116,7 +116,7 @@ ob_start();
                   <a href="<?php echo '?token='.base64_encode('updateProfile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                <a href="../config/logout.php" class="btn btn-default btn-flat">Sign out</a>
+                <a href="../config/loginModule/logout.php" class="btn btn-default btn-flat">Sign out</a>
                   
                 </div>
               </li>
@@ -272,7 +272,7 @@ ob_start();
   <div class="content-wrapper">
 
     <?php 
-    include "../config/route.php";
+    include "../config/recordsModule/route.php";
     include "../config/resultsModule/route.php";
     ?>
    </div>

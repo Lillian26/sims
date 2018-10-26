@@ -491,7 +491,7 @@
    function updateProfile($id)
    {
        $query = "SELECT * FROM users  WHERE id = '" . $id . "'";
-       include "real-config.php";
+       include '../config/authModule/real-config.php';
        $query_run = mysqli_query($mysqli, $query);
        $row = mysqli_fetch_array($query_run);
        $inst_id = $row['institute_instituteID'];
@@ -522,7 +522,7 @@
                                 $phone2 = $_POST['phone2'];
                                 $designation = $_POST['designation'];
                                 $date = date('Y/m/d H:i:s');
-                                include 'real-config.php';
+                                include '../config/authModule/real-config.php';
                                 include 'focus.php';
                                 if ($mysqli->query("UPDATE `users` SET `gender` = '$gender',`email` = '$email',`dob` = '$dob', `sname` = '$sname', `fname` = '$fname', `designation` = '$designation',`updated_On` = '$date', `phone1` = '$phone1', `phone2` = '$phone2' WHERE `users`.`id` = $id AND `users`.`institute_instituteID` = $inst_id")) {
                                     msg_success('Congratulations' . "  " . $fname . " " . strtoupper($sname), 'You Have Successfully Updated your User Profile. <a href ="?token=ZGFzaGJvYXJk">Proceed to Dashboard</a>');
@@ -751,7 +751,7 @@
                                 <tbody>
                                     <?php
                                         $query = "SELECT * FROM  users WHERE institute_instituteID = $inst_no ";
-                                        include 'real-config.php';
+                                        include '../config/authModule/real-config.php';
                                         $query_run = mysqli_query($mysqli, $query);
                                         if (!$query_run) {
                                             echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -960,7 +960,7 @@
                                         <select name="program" class="form-control">
                                         <?php
                                             $query = "SELECT * FROM  programme where action='Y'";
-                                            include 'real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1031,7 +1031,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1069,7 +1069,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1106,7 +1106,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1143,7 +1143,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1180,7 +1180,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1217,7 +1217,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1254,7 +1254,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'c'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1291,7 +1291,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'o'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1328,7 +1328,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'o'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1365,7 +1365,7 @@
                                                                 <option value ="">--Select Subject--</option>
                                                                 <?php
                                                                     $query = "SELECT * FROM  uce_subjects WHERE category = 'o'";
-                                                                    include 'real-config.php';
+                                                                    include '../config/authModule/real-config.php';
                                                                     $query_run = mysqli_query($mysqli, $query);
                                                                     if (!$query_run) {
                                                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1457,7 +1457,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uace_subjects ";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1494,7 +1494,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                             $query = "SELECT * FROM  uace_subjects ";
-                                                            include 'real-config.php';
+                                                            include '../config/authModule/real-config.php';
                                                             $query_run = mysqli_query($mysqli, $query);
                                                             if (!$query_run) {
                                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1531,7 +1531,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uace_subjects ";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1568,7 +1568,7 @@
                                                             <option value ="">--Select--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uace_subjects ";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1605,7 +1605,7 @@
                                                             <option value ="">--Select Subject--</option>
                                                             <?php
                                                                 $query = "SELECT * FROM  uace_subjects ";
-                                                                include 'real-config.php';
+                                                                include '../config/authModule/real-config.php';
                                                                 $query_run = mysqli_query($mysqli, $query);
                                                                 if (!$query_run) {
                                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -1710,7 +1710,7 @@
    }
    function updateinstituteDetails($inst_no){
        $query = "SELECT * FROM institute  WHERE id = '" . $inst_no . "'";
-       include "real-config.php";
+       include '../config/authModule/real-config.php';
        $query_run = mysqli_query($mysqli, $query);
        $row = mysqli_fetch_array($query_run);
     ?>
@@ -1740,7 +1740,7 @@
                             $email = $_POST['email'];
                             $inst_number = $_POST['inst_no'];
                             $date = date('Y/m/d H:i:s');
-                            include 'real-config.php';
+                            include '../config/authModule/real-config.php';
                             include 'focus.php';
                             if ($mysqli->query("UPDATE `institute` SET `institute_name` = '$inst_name',`poBox` = '$poBox', `address` = '$address', `telno1` = '$tel_1', `telno2` = '$tel_2', `email` = '$email', `type` = '$type', `logo` = 'a', `updated_On` = '$date' WHERE `institute`.`id` = '$inst_no'")) {
                                 msg_success('Operation Successful', 'You Have successfully updated the Institute Details <a href="?token=dXBkYXRlUHJvZmlsZQ=="> Please Update your Profile to Get Started</a>');
@@ -1822,7 +1822,7 @@
    function view_user($id)
    {
        $query = "SELECT * FROM users  WHERE id = $id";
-       include "real-config.php";
+       include '../config/authModule/real-config.php';
        $query_run = mysqli_query($mysqli, $query);
        $row = mysqli_fetch_array($query_run);
    
@@ -1987,7 +1987,7 @@
    }
    function edit_course($id)
    {
-        include "real-config.php";
+        include '../config/authModule/real-config.php';
    ?>
         <section class="content-header">
             <h1>
@@ -2048,7 +2048,7 @@
                                         <select name="programmeID" class="form-control">
                                             <?php
                                                 $query = "SELECT * FROM  programme where action='Y'";
-                                                include 'real-config.php';
+                                                include '../config/authModule/real-config.php';
                                                 $query_run = mysqli_query($mysqli, $query);
                                                 if (!$query_run) {
                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -2136,7 +2136,7 @@
                                         <select name="programmeID" class="form-control">
                                             <?php
                                                 $query = "SELECT * FROM  programme where action='Y'";
-                                                include 'real-config.php';
+                                                include '../config/authModule/real-config.php';
                                                 $query_run = mysqli_query($mysqli, $query);
                                                 if (!$query_run) {
                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -2205,7 +2205,7 @@
                                     <?php
                                     //we shall need  a condition to specify the university
                                         $query = "SELECT * FROM  courseunit where action='y'";
-                                        include 'real-config.php';
+                                        include '../config/authModule/real-config.php';
                                         $query_run = mysqli_query($mysqli, $query);
                                         if (!$query_run) {
                                             echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -2323,7 +2323,7 @@
 <?php
    }
    function edit_programme($id){
-    include "real-config.php";
+    include '../config/authModule/real-config.php';
    ?>
         <!--
         <section class="content-header">
@@ -2433,7 +2433,7 @@
                                 <?php
                                     //we shall need  a condition to specify the university
                                     $query = "SELECT * FROM  programme where action='y'";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run = mysqli_query($mysqli, $query);
                                     if (!$query_run) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -2815,7 +2815,7 @@
                                 <tbody>
                                     <?php
                                         $query = "SELECT * FROM  student";
-                                        include 'real-config.php';
+                                        include '../config/authModule/real-config.php';
                                         $query_run = mysqli_query($mysqli, $query);
                                         if (!$query_run) {
                                         //    echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -2858,12 +2858,12 @@
    }
    function view_std($id){
         $query = "SELECT * FROM student  WHERE id = '".$id."'";
-        include "real-config.php";
+        include '../config/authModule/real-config.php';
         $query_run = mysqli_query($mysqli, $query);
         $row = mysqli_fetch_array($query_run);
    
         $query_prog = "SELECT * FROM programme  WHERE programmeID = '".$row['program']."'";
-        include "real-config.php";
+        include '../config/authModule/real-config.php';
         $query_run_prog = mysqli_query($mysqli, $query_prog);
         $row_prog = mysqli_fetch_array($query_run_prog);
     ?>
@@ -3021,7 +3021,7 @@
                                 <option value='<?php echo $row_prog['programmeID'] ?>' selected><?php echo $row_prog['name'] ?></option>
                                 <?php
                                     $query = "SELECT * FROM  programme where action='Y'";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run = mysqli_query($mysqli, $query);
                                     if (!$query_run) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3099,7 +3099,7 @@
                                 <div id="sdemo" class="collapse" style="backgroud-color:#FFF;">
                                 <?php 
                                     $query_uce = "SELECT * FROM  uceresults WHERE student_studentID = $id";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run_uce = mysqli_query($mysqli, $query_uce);
                                     if (!$query_run_uce) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3118,7 +3118,7 @@
                                             <option value ="<?php echo $subject ?>" selected><?php echo $subject ?></option>
                                             <?php
                                                 $query = "SELECT * FROM  uce_subjects";
-                                                include 'real-config.php';
+                                                include '../config/authModule/real-config.php';
                                                 $query_run = mysqli_query($mysqli, $query);
                                                 if (!$query_run) {
                                                     echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3183,7 +3183,7 @@
                                 <?php 
                     
                                     $query_uace = "SELECT * FROM  uace_results WHERE student_studentID = $id";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run_uace = mysqli_query($mysqli, $query_uace);
                                     if (!$query_run_uace) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3204,7 +3204,7 @@
                                             <option value ="<?php echo $subject ?>" selected><?php echo $subject ?></option>
                                             <?php
                                             $query = "SELECT * FROM  uace_subjects ";
-                                            include 'real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3317,7 +3317,7 @@
                                 <?php
                                     //we shall need  a condition to specify the university
                                     $query = "SELECT * FROM  college";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run = mysqli_query($mysqli, $query);
                                     if (!$query_run) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3496,7 +3496,7 @@
                                 <?php
                                     //Getting all departments
                                     $query = "SELECT * FROM  department";
-                                    include 'real-config.php';
+                                    include '../config/authModule/real-config.php';
                                     $query_run = mysqli_query($mysqli, $query);
                                     if (!$query_run) {
                                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3512,7 +3512,7 @@
                                             <td>$fullname</td>
                                             ";
                                             $queryCollege = "SELECT fullname FROM  college WHERE collegeId =  '".$row['college_collegeId']."'";
-                                            include 'real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_runCollege = mysqli_query($mysqli, $queryCollege);
                                             while ($rowCollege = mysqli_fetch_array($query_runCollege)) {
                                                 $CollegeName = $rowCollege['fullname'];
@@ -3568,7 +3568,7 @@
                                     <select name="college" class="form-control">
                                         <?php
                                             $query = "SELECT * FROM  college;";
-                                            include 'real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3628,7 +3628,7 @@
                                     <select name="college" class="form-control">
                                         <?php
                                             $query = "SELECT * FROM  college;";
-                                            include 'real-config.php';
+                                            include '../config/authModule/real-config.php';
                                             $query_run = mysqli_query($mysqli, $query);
                                             if (!$query_run) {
                                                 echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3731,7 +3731,7 @@
                 <?php
                                     //we shall need  a condition to specify the university
                     $query = "SELECT * FROM  grading";
-                    include 'real-config.php';
+                    include '../config/authModule/real-config.php';
                     $query_run = mysqli_query($mysqli, $query);
                     if (!$query_run) {
                         echo "Query_Run_Error" . mysqli_error($mysqli);
@@ -3799,7 +3799,7 @@
              <?php
                                  //we shall need  a condition to specify the university
                  $query = "SELECT * FROM  grading";
-                 include 'real-config.php';
+                 include '../config/authModule/real-config.php';
                  $query_run = mysqli_query($mysqli, $query);
                  if (!$query_run) {
                      echo "Query_Run_Error" . mysqli_error($mysqli);

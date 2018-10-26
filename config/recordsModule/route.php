@@ -1,8 +1,8 @@
 <?php
   error_reporting(E_ALL ^ E_NOTICE);
 
-  include "../config/view.php";
-  include_once '../config/login/login-func.php';
+  include "../config/recordsModule/view.php";
+  include_once '../config/loginModule/login-func.php';
   include "focus.php";
 
 if (isset($_REQUEST['token'])){
