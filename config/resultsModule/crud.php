@@ -62,7 +62,7 @@ function insert_marks(){
     $mark = $_POST['mark'];
     $studentId = $_POST['student'];
     $addedBy = $_POST['lecturer'];
-    $grade = $_POST['grade'];
+    $grade = trim($_POST['grade']);
     $gp = getGP($grade);
     
     $queryCheck = "SELECT * FROM marks WHERE courseunit_programme_programmeID = '" . $Programme . "' AND semester = '" . $semester . "' AND yearOfOffering = '" . $year . "' AND student_studentID = '" . $studentId . "' AND courseunit_courseunitID = '" . $courseunits . "'";
