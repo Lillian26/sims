@@ -331,7 +331,11 @@ $(document).ready(function () {
     
     	//populate select with all students
         $(".load-result").on('click', function (event) {
-            var selected = $('.allstudents').val();
+			var selected = $('.allstudents').val();
+			var year = $('.year').val();
+			var semester = $('.semester').val();
+			var allResults = "";;
+		//	alert(allResults);
             //alert(selected);
             if (selected == 'none'){
                 $(".error").show();
@@ -341,7 +345,7 @@ $(document).ready(function () {
                 $( ".show-fa" ).addClass( "fa fa-spinner fa-spin" );
                 $.ajax({
                     type: 'POST',
-                    url: "../config/resultsModule/route.php?call=" + window.btoa('getStudent') + "&id=" + selected,
+                    url: "../config/resultsModule/route.php?call=" + window.btoa('getStudent') + "&id=" + selected + "&year=" + year + "&semester=" + semester + "&all=" + allResults,
                     success: (data) => {
                         $(".results-wrapper").show();
                         $(".details-student").show();

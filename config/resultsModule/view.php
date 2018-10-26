@@ -211,18 +211,12 @@ function singleResult(){
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box box-primary">
-                        <!-- /.box-header -->
-                        <div class="box-header with-border">
-
-                            Select Entry Mode
-                        </div>
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="col-sm-1">
-                                        <label>Student</label>
-                                    </div>
-                                    <div class="col-lg-4">
+                                    
+                                    <div class="col-lg-3">
+                                    <label>Student</label>
                                         <select name="allstudents" class="form-control allstudents">
                                             <?php
                                             $query = "SELECT * FROM  student";
@@ -240,9 +234,39 @@ function singleResult(){
                                             ?>
                                         </select>
                                                     <div class = "error"><i style="color:red;font-size:15px;">Please select a Student!</i></div>
-                                    </div>
-                                    <div class="col-sm-4">
-
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Year</label>
+                                                    <select class="form-control year">
+                                                        <option value = "">--Select--</option>
+                                                        <option value = "1">Year 1</option>
+                                                        <option value = "2">Year 2</option>
+                                                        <option value = "3">Year 3</option>
+                                                        <option value = "allyrs">All Years</option>
+                                            </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                            <label>Semester</label>
+                                                    <select class="form-control semester">
+                                                        <option value = "">--Select--</option>
+                                                        <option value = "1">Semester 1</option>
+                                                        <option value = "2">Semester 2</option>
+                                                     
+                                            </select>
+                                            </div>
+                                            <div class="col-lg-2">
+                                           
+                                                <div class="checkbox" >
+                                                    <label  style="margin-top:-50px">
+                                                    <input type="checkbox" class="allResults">
+                                                    All Results
+                                                    </label>
+                                                </div>
+                                                </div>
+                                            
+                                            
+                                    <div class="col-lg-2">
+                                    <label></label>
                                         <button class="btn btn-success btn-flat load-result"><i class="show-fa"></i>&nbsp;Load Result</button>
                                     </div>
                                 </div>
@@ -256,13 +280,14 @@ function singleResult(){
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box box-primary">
+                   
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-lg-8 details-student">
+                                <div class="col-lg-12 details-student">
                               
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-12">
                                
                                 </div>
                             </div>
