@@ -26,8 +26,10 @@ if (isset($_REQUEST['call'])){
       insert_marks();
     break;
     case "getStudent":
-    $id = $_REQUEST['id'];
-    loadTranscript($id);
+    $id = $_GET['id'];
+    $year = $_GET['year'];
+    $semester = $_GET['semester'];
+    loadTranscript($id,$year,$semester);
     break;
     case "GradeStudent":
     $mark = $_REQUEST['mark'];

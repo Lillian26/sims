@@ -198,7 +198,7 @@ function GradeStudent($mark) {
         
 }
 
-function loadTranscript($id) {
+function loadTranscript($id,$sel_year,$sel_semester) {
     $no_content = "<div class='jumbotron'>No content found!</div>";
     $con = con();
     $get_details = mysqli_query($con, "SELECT * FROM student WHERE id='$id'");
@@ -230,7 +230,7 @@ function loadTranscript($id) {
     $nationality = $student_details['nationality'];
     $pic_url = '../dist/img/user-avatar.png';
 
-    $transcript_title = "STUDENT TRANSCRIPT";
+    $transcript_title = "STUDENT RESULTS";
     $transcript_heading = "Student Details";
     $caption_name = "NAME";
     $caption_reg_no = "REG. NO";
@@ -280,14 +280,25 @@ function loadTranscript($id) {
             </div>
         </div> 
     ";
-    $get_years = mysqli_query($con, "SELECT yearOfOffering FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id'  GROUP BY yearOfOffering ORDER BY yearOfOffering");
+    if($sel_year == "allyrs"){
+        $get_years = mysqli_query($con, "SELECT yearOfOffering FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id'  GROUP BY yearOfOffering ORDER BY yearOfOffering");
+    }else{
+        $get_years = mysqli_query($con, "SELECT yearOfOffering FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id' AND yearOfOffering = '$sel_year' GROUP BY yearOfOffering ORDER BY yearOfOffering");
+    }
     $count = 0;
     $total_gp_cu = 0;
     $total_cu = 0;
     $transcript_ui = "";
+ 
     while ($years = mysqli_fetch_array($get_years)) {
         $year_of_offering = getYearName($years['yearOfOffering']);
-        $sems = mysqli_query($con, "SELECT semester FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id' GROUP BY semester ORDER BY yearOfOffering");
+        $yrno = $years['yearOfOffering'];
+        if($sel_year == "allyrs"){
+            $sems = mysqli_query($con, "SELECT semester FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id'  GROUP BY semester ORDER BY yearOfOffering");
+        }else{
+            $sems = mysqli_query($con, "SELECT semester FROM marks WHERE student_studentID='$id' AND courseunit_programme_programmeID ='$prog_id' AND semester = '$sel_semester' GROUP BY semester ORDER BY yearOfOffering");
+
+        }
         while ($get_semester = mysqli_fetch_array($sems)) {
             $semester = $get_semester['semester'];
             $semester_caption = getSemesterName($semester);
@@ -306,21 +317,35 @@ function loadTranscript($id) {
                                     <th> $caption_gp </th>
                                     <th> $caption_grade </th>
                                 </tr>";
-            $get_results = mysqli_query($con, "SELECT c.courseunitCode,c.name,c.creditUnits,m.mark,m.grade FROM marks m JOIN courseunit c ON  m.courseunit_courseunitID = c.courseunitID WHERE m.student_studentID='$id' AND m.courseunit_programme_programmeID ='$prog_id' AND m.yearOfOffering='$year_of_offering' AND m.semester='$semester' ORDER BY c.courseunitCode");
+            $get_results = mysqli_query($con, "SELECT c.courseunitCode,c.name,c.creditUnits,m.mark,m.grade FROM marks m JOIN courseunit c ON  m.courseunit_courseunitID = c.courseunitID WHERE m.student_studentID='$id' AND m.courseunit_programme_programmeID ='$prog_id' AND m.yearOfOffering='$yrno' AND m.semester='$semester' ORDER BY c.courseunitCode");
             if(!$get_results){
                 echo 'no'.mysqli_error($con);
             }
             while ($student_results = mysqli_fetch_array($get_results)) {
                 $course_unit_code = $student_results['courseunitCode'];
                 $course_unit_name = $student_results['name'];
-
+                $grade = $student_results['grade'];
                 $cu = $student_results['creditUnits'];
 
-                $gp = number_format(getGP($student_results['grade']), 1);
-                echo "cu<<<<<<<<<<------->".$cu;
-                echo "gp<<<<<<<<<<<---------->".$gp;
+                //echo "grade:".$grade."<br>" ;
+                $query = "SELECT * FROM grading WHERE grade = '".$grade."'";
+                
+                $query_run = mysqli_query($con, $query);
+                if(!$query_run){
+                    echo "no".mysqli_error($con);
+                }
+                $row = mysqli_fetch_array($query_run); 
+                $gp = $row['gp'];
+               
+              
+                
+
+               // echo "gp:".$gp."<br>" ;
+
+               // echo "cu:".$cu."<br>" ;
+               // echo "total_cu----------".$total_cu;
                 $mark = $student_results['mark'];
-                $grade = $student_results['grade'];
+                
                 $total_gp_cu += $gp * $cu;
                 $total_cu += $cu;
                 $transcript_ui .= "
@@ -332,8 +357,8 @@ function loadTranscript($id) {
                     <td> $grade </td>
                 </tr>";
             }
-            echo "total_gp_cu-------".$total_gp_cu;
-            echo "total_cu----------".$total_cu;
+           //echo "total_gp_cu-------".$total_gp_cu."<br>";
+          // echo "total_cu----------".$total_cu."<br>";
             if ($total_cu > 0)
                 $gpa = number_format($total_gp_cu / $total_cu, 2);
             $count += 1;
@@ -344,7 +369,7 @@ function loadTranscript($id) {
             }
             $transcript_ui .= "
                     <tr>
-                        <td colspan='2'> &nbsp; </td>
+                        <td colspan='2'> <b><i> </i></b></td>
                         <td colspan='3'><b><i> $gpa_caption &nbsp; $gpa </i></b></td>
                     </tr>
                 </table>
@@ -410,14 +435,16 @@ function getAward($cgpa) {
     }
     return $award;
 }
-function getGP($grade) {                 // geting all the the data in the grading table
+function getGP($grade) {  
+    $strvar = settype($grade, 'string');;            
     $mysqli = con();
-    $query = "SELECT * FROM grading WHERE grade = '".$grade."'";
+    $query = "SELECT * FROM grading WHERE grade = '".$strvar."'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
         echo "Query Run Error" . mysqli_error($mysqli);
     } else {
        $row = mysqli_fetch_array($query_run); 
-       echo $row['gp'];
+       $gp = $row['gp'];
+       return $gp;
     }
 }
