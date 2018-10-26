@@ -3,7 +3,7 @@
 
   include "../config/recordsModule/view.php";
   include_once '../config/loginModule/login-func.php';
-  include "focus.php";
+
 
 if (isset($_REQUEST['token'])){
   $signing = base64_decode($_REQUEST['token']);
