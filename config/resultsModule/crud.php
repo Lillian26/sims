@@ -28,7 +28,77 @@ function getCourseunits($prog,$semester,$year) {
         
     }
 }
-
+function edit_getCourseunits($year,$semester,$stdid) {
+    $mysqli = con();
+    $query = "SELECT c.courseunitCode,c.name,c.courseunitID FROM marks m JOIN courseunit c ON  m.courseunit_courseunitID = c.courseunitID WHERE m.semester = '" . $semester . "' AND m.yearOfOffering = '" . $year . "' AND m.student_studentID = '" . $stdid . "'";
+    $query_run = mysqli_query($mysqli, $query);
+    $num = mysqli_num_rows($query_run);
+    echo "nummmmmm".$num;
+    if (!$query_run) {
+        echo "Query Run Error" . mysqli_error($mysqli);
+    } else {
+        if ($num>0){
+                echo "<option selected='selected'>--Select--</option>";
+                while ($row = mysqli_fetch_array($query_run)) {
+                echo "
+                    
+                    <option value='".$row['courseunitID']."'>".$row['courseunitCode']."-".$row['name']."</option>
+                ";   
+            }
+        }else{
+            echo "<option>No Courseunits </option>";
+        }
+        
+    }
+}
+function edit_loadCourseunits($year,$semester,$stdid,$courseunit) {
+    $mysqli = con();
+    $query = "SELECT c.courseunitCode,c.name,c.courseunitID,m.mark,m.grade FROM marks m JOIN courseunit c ON  m.courseunit_courseunitID = c.courseunitID WHERE m.semester = '" . $semester . "' AND m.yearOfOffering = '" . $year . "' AND m.student_studentID = '" . $stdid . "' AND m.courseunit_courseunitID = '" . $courseunit . "'";
+    $query_run = mysqli_query($mysqli, $query);
+    $num = mysqli_num_rows($query_run);
+   // echo "nummmmmm".$num;
+    if (!$query_run) {
+        echo "Query Run Error" . mysqli_error($mysqli);
+    } else {
+        if ($num>0){
+            $row = mysqli_fetch_array($query_run);
+            $courseunitCode = $row["courseunitCode"];
+            $name = $row["name"];
+            $mark = $row["mark"];
+            $grade = $row["grade"];
+                echo "
+                <form role='form' id='updateMark' method=post'>
+                <table class='table table-striped margin-negative-10'>
+                <tr>
+                    <th> Course Code </th>
+                    <th> Course Name</th>
+                    <th> Mark </th>
+                </tr>";
+                echo " <tr>
+                <td> $courseunitCode </td>
+                <td> $name </td>
+                <td> <input type = 'text' value = '$mark' style='float:center;font-size:20px;font-weight:bold;width:50px'  class = 'updated-mark' required> </td>
+               
+                </tr></table>";
+                echo "<label>Comment/Reason For Edit</label><textarea class='form-control editReason' required></textarea><br>";
+                echo "<button  type = 'submit' class='btn btn-success btn-flat btn-sm pull-right '>Edit Result</button>
+                </form>";
+            
+        }else{
+            echo "<option>No Courseunits </option>";
+        }
+        
+    }
+}
+function UpdateSingleResult($id,$year,$semester,$courseunitID,$mark,$reason){
+        $mysqli = con();
+        if ($mysqli->query("UPDATE `marks` SET mark = '".$mark."',reasonForChange = '".$reason."' WHERE m.semester = '" . $semester . "' AND m.yearOfOffering = '" . $year . "' AND m.student_studentID = '" . $stdid . "' AND m.courseunit_courseunitID = '" . $courseunit . "' ")) {
+            msg_success('Operation Successful', 'Mark Edit');
+        } else {
+            msg_error('Operation Failed', 'An Error Occured');
+            echo $mysqli->error;
+        }
+}
 function getStudents($Programme,$year,$intake) {
         $mysqli = con();
         $query = "SELECT * FROM student WHERE program = '" . $Programme . "' AND yearOfStudy = '" . $year . "' AND academicyearEntry = '" . $intake . "'";
@@ -191,9 +261,6 @@ function GradeStudent($mark) {
         case $mark = "":
         echo  'none';
         break;
-        case $mark = null:
-        echo  'none';
-        break;
         }
         
 }
@@ -213,16 +280,16 @@ function loadTranscript($id,$sel_year,$sel_semester) {
         return;
     }
     $student_details = mysqli_fetch_array($get_details);
-    $name = $student_details['surname']."".$student_details['firstName'];
+    $name = strtoupper($student_details['surname'])." ".$student_details['firstName'];
     $gender = $student_details['gender'];
     $regNo = $student_details['regNo'];
     $prog_id = $student_details['program'];
-
+    $academicyearEntry = $student_details['academicyearEntry'];
     $get_program = mysqli_query($con, "SELECT * FROM programme WHERE programmeID='$prog_id'");
     if(!$get_program){
         echo 'no'.$get_program;
     }
-    $get_program_name = mysqli_fetch_array($get_details);
+    $get_program_name = mysqli_fetch_array($get_program);
     $prog_name = $get_program_name['name'];
 
     $dob = $student_details['dob'];
@@ -236,7 +303,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
     $caption_reg_no = "REG. NO";
     $caption_dob = "DOB";
     $caption_gender = "GENDER";
-    $caption_completion = "COMPLETION";
+    $caption_intake = "INTAKE";
     $caption_program = "PROGRAMME";
     $caption_course_code = "COURSE CODE";
     $caption_course_name = "COURSE NAME";
@@ -271,7 +338,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
                         <div><b>$caption_gender:</b> &nbsp; $gender </div>
                     </div>
                     <div class='col-md-6 transcript-info '>
-                        <div><b>$caption_completion:</b> &nbsp; $date_of_completion </div>
+                        <div><b>$caption_intake:</b> &nbsp; $academicyearEntry </div>
                     </div>
                     <div class='col-md-6 transcript-info '>
                         <div><b>$caption_program:</b> &nbsp; $prog_name </div>
@@ -327,7 +394,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
                 $grade = $student_results['grade'];
                 $cu = $student_results['creditUnits'];
 
-                //echo "grade:".$grade."<br>" ;
+               // echo "grade:".$grade."<br>" ;
                 $query = "SELECT * FROM grading WHERE grade = '".$grade."'";
                 
                 $query_run = mysqli_query($con, $query);
@@ -342,7 +409,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
 
                // echo "gp:".$gp."<br>" ;
 
-               // echo "cu:".$cu."<br>" ;
+                //echo "cu:".$cu."<br>" ;
                // echo "total_cu----------".$total_cu;
                 $mark = $student_results['mark'];
                 
@@ -357,8 +424,9 @@ function loadTranscript($id,$sel_year,$sel_semester) {
                     <td> $grade </td>
                 </tr>";
             }
-           //echo "total_gp_cu-------".$total_gp_cu."<br>";
-          // echo "total_cu----------".$total_cu."<br>";
+          // echo "total_gp_cu-------".$total_gp_cu."<br>";
+           //echo "total_cu----------".$total_cu."<br>";
+           //echo "gpa----------".number_format($total_gp_cu / $total_cu, 2)."<br>";
             if ($total_cu > 0)
                 $gpa = number_format($total_gp_cu / $total_cu, 2);
             $count += 1;
@@ -369,7 +437,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
             }
             $transcript_ui .= "
                     <tr>
-                        <td colspan='2'> <b><i> </i></b></td>
+                        <td colspan='2'><b><i> </i></b></td>
                         <td colspan='3'><b><i> $gpa_caption &nbsp; $gpa </i></b></td>
                     </tr>
                 </table>

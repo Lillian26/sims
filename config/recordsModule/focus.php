@@ -335,12 +335,6 @@ function insert_programme(){
     }
 }
 function update_programme($id,$name,$category,$duration,$gradLoad,$code) {
-    // $name = $_POST['pname'];
-    // $category = $_POST['category'];
-    // $duration = $_POST['duration'];
-    // $gradLoad = $_POST['gradLoad'];
-    // $code = $_POST['code'];
-    // echo "lllllllllllllllll".$inst_id;
     include '../config/authModule/real-config.php';
     if(check_program($code) == false){
         if ($mysqli->query("UPDATE `programme` SET name = '" . $name . "',category = '" . $category . "',duration =  '" . $duration . "',gradLoad =   '" . $gradLoad . "',code =  '" . $code . "' WHERE programmeID = '" . $id . "'")) {

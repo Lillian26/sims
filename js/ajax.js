@@ -2,7 +2,9 @@ $(document).ready(function () {
     $(".details-student").hide();
     $(".results-wrapper").hide();
     $(".error").hide();
-    
+	$(".year").attr("disabled", false);
+	$(".semester").attr("disabled", false);
+	$(".load-result").attr("disabled", true);
 	/* Global variables */
 	var selectedId;
 	var processing = false;
@@ -92,7 +94,7 @@ $(document).ready(function () {
 			$.ajax({
 				type: 'POST',
 				data: data,
-				url: "../config/route.php?token=" + window.btoa(handler),
+				url: "../config/recordsModule/route.php?token=" + window.btoa(handler),
 				success: (data) => {
 					if (data) {
 						$(".modal-alert-wrapper").html(data);
@@ -111,7 +113,7 @@ $(document).ready(function () {
 			selectedId = id;
 			$.ajax({
 				type: 'GET',
-				url: "../config/route.php?token=" + window.btoa(dataSourceHandler) + "&id=" + selectedId,
+				url: "../config/recordsModule/route.php?token=" + window.btoa(dataSourceHandler) + "&id=" + selectedId,
 				success: (data) => {
 					var obj = JSON.parse(data);
 					/* Determine the fields to populate */
@@ -147,7 +149,7 @@ $(document).ready(function () {
 			$.ajax({
 				type: 'POST',
 				data: data,
-				url: "../config/route.php?token=" + window.btoa(handler) + "&id=" + selectedId,
+				url: "../config/recordsModule/route.php?token=" + window.btoa(handler) + "&id=" + selectedId,
 				success: (data) => {
 					$(".modal-alert-wrapper").html(data);
 					selectedId = null;
@@ -172,7 +174,7 @@ $(document).ready(function () {
 			event.preventDefault();
 			$.ajax({
 				type: 'GET',
-				url: "../config/route.php?token=" + window.btoa(handler) + "&id=" + selectedId,
+				url: "../config/recordsModule/route.php?token=" + window.btoa(handler) + "&id=" + selectedId,
 				success: (data) => {
 					$(".modal-alert-wrapper").html(data);
 					location.reload();
@@ -303,32 +305,39 @@ $(document).ready(function () {
 
 
 	//send request to populate students <select>
-	$('.final-mark').keyup(function () {
-		var mark = $(this).val();
-		if (mark > 100) {
-			alert("Mark cant be greater than 100");
-			$(".final-mark").val("");
-			$(".gradeStd").val("");
-		}
-		console.log(mark);
+	function listen_getGrade(formClass){
+		$("." + formClass + "").keyup(function () {
+			var mark = $(this).val();
+			if (mark > 100) {
+				alert("Mark cant be greater than 100");
+				$(".final-mark").val("");
+				$(".gradeStd").val("");
+			}
+			console.log(mark);
+	
+			if (mark == "" || mark == null) {
+				$(".gradeStd").html('None');
+			} else {
+				$.ajax({
+					type: 'POST',
+					url: "../config/resultsModule/route.php?call=" + window.btoa('GradeStudent') + "&mark=" + mark,
+					success: (data) => {
+						//  var obj = JSON.parse(data);
+						console.log(data);
+						$(".gradeStd").html(data);
+						$(".gradeT").val(data);
+						$(".cuT").val('');
+					}
+				});
+			}
+		});
+	}
 
-		if (mark == "" || mark == null) {
-			$(".gradeStd").html('None');
-		} else {
-			$.ajax({
-				type: 'POST',
-				url: "../config/resultsModule/route.php?call=" + window.btoa('GradeStudent') + "&mark=" + mark,
-				success: (data) => {
-					//  var obj = JSON.parse(data);
-					console.log(data);
-					$(".gradeStd").html(data);
-					$(".gradeT").val(data);
-					$(".cuT").val('');
-				}
-			});
-		}
-    });
-    
+	listen_getGrade('final-mark');
+	
+	$('.allstudents').change(function () {
+	
+	});
     	//populate select with all students
         $(".load-result").on('click', function (event) {
 			var selected = $('.allstudents').val();
@@ -349,7 +358,6 @@ $(document).ready(function () {
                     success: (data) => {
                         $(".results-wrapper").show();
                         $(".details-student").show();
-                       console.log(data);
                        $(".details-student").html(data);
                         $( ".show-fa" ).removeClass( "fa fa-spinner fa-spin" ).addClass("fa fa-download" );
                     }

@@ -184,7 +184,7 @@ ob_start();
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-users"></i>
+            <i class="fa fa-file-o"></i>
             <span>Academics </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -199,13 +199,39 @@ ob_start();
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-file-o"></i>
+            <span>Finance</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href=""><i class="fa fa-circle-o"></i>Setup fee applicable</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> Create Invoice</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> Add fee Received</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i> Add Scholarship</a></li>
+            <li><a href=""><i class="fa fa-circle-o"></i>Student Finacial Statement</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-file-o"></i>
+            <span>Library</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+      
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-envelope-o"></i>
             <span>Send SMS </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu menu-open" style="display: block;">
+          <ul class="treeview-menu">
             <li><a href=""><i class="fa fa-circle-o"></i> Individual</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Students</a></li>
             <li><a href=""><i class="fa fa-circle-o"></i> Lecturers</a></li>
@@ -507,6 +533,7 @@ ob_start();
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
 <script src="../js/ajax.js"></script>
+<script src="../js/results.js"></script>
 <!-- DataTables -->
 <script src="../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
