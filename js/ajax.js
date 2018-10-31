@@ -4,7 +4,7 @@ $(document).ready(function () {
     $(".error").hide();
 	$(".year").attr("disabled", false);
 	$(".semester").attr("disabled", false);
-	$(".load-result").attr("disabled", true);
+	$(".load-result").attr("disabled", false);
 	/* Global variables */
 	var selectedId;
 	var processing = false;

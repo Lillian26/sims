@@ -207,6 +207,19 @@ function singleResult(){
                 <li class="active">Dashboard</li>
             </ol>
         </section>
+        <div class="row">
+        <div class="col-sm-6 pull-right">
+                                    <div class="col-sm-2">
+                                        <a href='<?php echo '?call='.base64_encode('entermarks') ?>' class="btn btn-success btn-flat  btn-sm "><i class="fa fa-plus"></i>&nbsp;Add Result</a>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a href='<?php echo '?call='.base64_encode('editsingleresult') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Edit Result</a>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</button>
+                                    </div>
+</div>
+</div>
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
@@ -257,16 +270,7 @@ function singleResult(){
                                     <div class="col-lg-2" style="margin-top:25px">
                                         <button class="btn btn-primary btn-flat  btn-sm load-result"><i class="show-fa"></i>&nbsp;Load Result</button>
                                     </div>
-                                    &nbsp;
-                                    <div class="col-lg-1" style="margin-top:25px">
-                                        <a href='<?php echo '?call='.base64_encode('entermarks') ?>' class="btn btn-success btn-flat  btn-sm "><i class="fa fa-plus"></i>&nbsp;Add Result</a>
-                                    </div>
-                                    <div class="col-lg-1" style="margin-top:25px">
-                                        <a href='<?php echo '?call='.base64_encode('editsingleresult') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Edit Result</a>
-                                    </div>
-                                    <div class="col-sm-1" style="margin-top:25px">
-                                        <button class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</button>
-                                    </div>&nbsp;
+                                  
                                 </div>
                             </div>
                         </div>
@@ -357,7 +361,7 @@ function EditSingleResult(){
                                           </select>
                                     <div class ="">
                                         <br>
-                                        <button class="btn btn-primary btn-flat  btn-sm edit-result"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                        <button class="btn btn-primary btn-flat  btn-sm edit-result  spin-load"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
                                     &nbsp;
                                       &nbsp;
                                         

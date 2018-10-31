@@ -376,7 +376,7 @@ function loadTranscript($id,$sel_year,$sel_semester) {
                             $year_of_offering &nbsp; $semester_caption
                         </div>
                         <div class='panel-body table-scrollable'>
-                            <table class='table table-striped margin-negative-10'>
+                            <table class='table table-striped margin-negative-10 display'>
                                 <tr>
                                     <th> $caption_course_code </th>
                                     <th> $caption_course_name </th>
