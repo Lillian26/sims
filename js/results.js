@@ -56,28 +56,19 @@ $(document).ready(function () {
         var editYear = $(".edit-year").val();
         var editSemester = $('.edit-semester').val();
         var editCourseunit = $('.edit-courseunit').val();
+        $( ".spin-load" ).addClass( "fa fa-spinner fa-spin" );
         $.ajax({
             type: 'POST',
 			url: "../config/resultsModule/route.php?call=" + window.btoa("edit_loadCourseunits") + "&id=" + studentId + "&year=" + editYear + "&semester=" + editSemester+ "&courseunit=" + editCourseunit,
             success: (data) => {
                // gradeStudent(mark)
                 $(".show-courseunits-edit").html(data);
+                $( ".spin-load" ).removeClass( "fa fa-spinner fa-spin" )
             }
         });
     });
     
     $(".updateResult").on('click', function (event) {
-        event.preventDefault();
-       
-        $.ajax({
-            type: 'POST',
-			url: "../config/resultsModule/route.php?call=" + window.btoa("updateSingleResult") + "&id=" + studentId + "&year=" + editYear + "&semester=" + editSemester+ "&courseunit=" + editCourseunit + "&mark=" + mark  + "&reason=" + reason,
-            success: (data) => {
-                $(".modal-alert-wrapper").html(data);
-            },
-            error: (error) => {
-                console.log("There was an error:", error);
-            }
-        });
+      alert('yes');
     });
 });

@@ -63,7 +63,7 @@ ob_start();
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
   <header class="main-header">
@@ -92,7 +92,9 @@ ob_start();
                   if(login_check($mysqli) == true){
                   $username = getfield('username',$mysqli);
                   $designation = getfield('designation',$mysqli);
+                  $inst_name = getfield_inst('institute_name',$id,$mysqli);
                   echo $username;
+                  echo " | ".strtoupper($inst_name);
                   }else{
                     header('Location: http://localhost:9090/sims/?this=dXNldGhpc3RvbG9naW4=');
                   } 
@@ -105,7 +107,7 @@ ob_start();
                 <img src="../dist/img/user-avatar.png" class="img-circle" alt="User Image">
                 <p>
                   <?php echo $username ?> - <?php echo $designation ?>
-                  <small>Member since Nov. 2012</small>
+                  <small></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -142,8 +144,7 @@ ob_start();
             if(login_check($mysqli) == true){
             $id = getfield('institute_instituteID',$mysqli);
       
-            $inst_name = getfield_inst('institute_name',$id,$mysqli);
-            echo $inst_name;
+            
             }else{
               header('Location: http://localhost:9090/sims/?this=dXNldGhpc3RvbG9naW4=');
             } 
