@@ -53,11 +53,28 @@ if (isset($_REQUEST['call'])){
     EditSingleResult();
     break;
 
+    case "bulkentry":
+    bulkyEntry();
+    break;
+
     case "edit_getCourseunits":
     $id = $_GET['id'];
     $year = $_GET['year'];
     $semester = $_GET['semester'];
     edit_getCourseunits($year,$semester,$id);
+    break;
+
+    case "bulk_getCourseunits":
+    $id = $_GET['id'];
+    $year = $_GET['year'];
+    $semester = $_GET['semester'];
+    bulk_getCourseunits($year,$semester,$id);
+    break;
+
+    case "bulk_loadStudentsMarks":
+    $id = $_GET['id'];
+    $year = $_GET['year'];
+    bulk_loadStudentsMarks($year,$id);
     break;
 
     case "edit_loadCourseunits":
