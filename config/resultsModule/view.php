@@ -29,7 +29,7 @@
                     <div class="box-body">
                         <center>
                             <button class="btn btn-success btn-flat individualmarksentry" name="individualmarksentry"><i class=""></i>Individual</button>
-                            <button class="btn btn-primary btn-flat"><i class=""></i>Bulky Entry</button>
+                            <a href ="<?php echo ' ?call='.base64_encode('bulkentry') ?>" class="btn btn-primary btn-flat"><i class=""></i>Bulky Entry</a>
                         </center>
                     </div>
                     <!-- /.box-body -->
@@ -208,18 +208,18 @@ function singleResult(){
             </ol>
         </section>
         <div class="row">
-        <div class="col-sm-6 pull-right">
-                                    <div class="col-sm-2">
-                                        <a href='<?php echo '?call='.base64_encode('entermarks') ?>' class="btn btn-success btn-flat  btn-sm "><i class="fa fa-plus"></i>&nbsp;Add Result</a>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <a href='<?php echo '?call='.base64_encode('editsingleresult') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Edit Result</a>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</button>
-                                    </div>
-</div>
-</div>
+            <div class="col-sm-6 pull-right">
+                <div class="col-sm-2">
+                    <a href='<?php echo ' ?call='.base64_encode('entermarks') ?>' class="btn btn-success btn-flat  btn-sm "><i class="fa fa-plus"></i>&nbsp;Add Result</a>
+                </div>
+                <div class="col-sm-2">
+                    <a href='<?php echo ' ?call='.base64_encode('editsingleresult') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Edit Result</a>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</button>
+                </div>
+            </div>
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
@@ -270,7 +270,7 @@ function singleResult(){
                                     <div class="col-lg-2" style="margin-top:25px">
                                         <button class="btn btn-primary btn-flat  btn-sm load-result"><i class="show-fa"></i>&nbsp;Load Result</button>
                                     </div>
-                                  
+
                                 </div>
                             </div>
                         </div>
@@ -301,28 +301,28 @@ function singleResult(){
 }
 function EditSingleResult(){
     ?>
-          <!-- Content Header (Page header) -->
-          <section class="content-header">
-              <h1>
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
               Edit Single Result
                   <small>Enter Details</small>
               </h1>
-              <ol class="breadcrumb">
-                  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                  <li class="active">Dashboard</li>
-              </ol>
-          </section>
-          <section class="content">
-              <div class="row">
-                  <div class="col-lg-4">
-                      <div class="box box-default">
-                          <div class="box-body">
-                              <div class="row">
-                                  <div class="col-lg-12">
-  
-                                          <label>Student</label>
-                                          <select name="allstudents" class="form-control edit-allstudents" required>
-                                              <?php
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="box box-default">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <label>Student</label>
+                                            <select name="allstudents" class="form-control edit-allstudents" required>
+                                                <?php
                                               $query = "SELECT * FROM  student";
                                               include '../config/authModule/real-config.php';
                                               $query_run = mysqli_query($mysqli, $query);
@@ -337,57 +337,150 @@ function EditSingleResult(){
                                                   }
                                               ?>
 
-                                          </select>
-                                                                                     
+                                            </select>
 
-                                          <label>Year</label>
-                                          <select class="form-control edit-year" required>
-                                              <option value="">Select</option>
-                                              <option value="1">Year 1</option>
-                                              <option value="2">Year 2</option>
-                                              <option value="3">Year 3</option>
-                                             
-                                          </select>
+                                            <label>Year</label>
+                                            <select class="form-control edit-year" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Year 1</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 3</option>
 
-                                          <label>Semester</label>
-                                          <select class="form-control edit-semester">
-                                              <option value="">--Select--</option>
-                                              <option value="1">Semester 1</option>
-                                              <option value="2">Semester 2</option>
-                                          </select>
-                                          <label>Courseunit</label>
-                                          <select class="form-control edit-courseunit">
-                                              <!-- JS populate courseunits -->
-                                          </select>
-                                    <div class ="">
-                                        <br>
-                                        <button class="btn btn-primary btn-flat  btn-sm edit-result  spin-load"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
-                                    &nbsp;
-                                      &nbsp;
-                                        
-                                                </div>
-                                  </div>
-                              </div>
-                             
-                          </div>
-                          
-                      </div>
-                     
-                  </div>
-                  <div class = "col-lg-6 ">
-                  <section class="content">
-              <div class="row">
-                  <div class="col-xs-12">
-                      <div class="box box-primary">
-                      <div class="modal-alert-wrapper"></div>
-                          <div class="box-body show-courseunits-edit">
-                                                </div>
-                                                </div>
-                                                </div>
-                 </div>
-              </div>
-          </section>
-          
-              <?php
+                                            </select>
+
+                                            <label>Semester</label>
+                                            <select class="form-control edit-semester">
+                                                <option value="">--Select--</option>
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                            </select>
+                                            <label>Courseunit</label>
+                                            <select class="form-control edit-courseunit">
+                                                <!-- JS populate courseunits -->
+                                            </select>
+                                            <div class="">
+                                                <br>
+                                                <button class="btn btn-primary btn-flat  btn-sm edit-result  spin-load"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                                &nbsp; &nbsp;
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-lg-6 ">
+                        <span class = "badge bg-red"></span>
+                            <section class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="box box-primary">
+                                            <div class="modal-alert-wrapper"></div>
+                                            <div class="box-body show-courseunits-edit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </section>
+
+                        <?php
   }
+  function bulkyEntry(){
+  
+      ?>
+         <!-- Content Header (Page header) -->
+         <section class="content-header">
+                    <h1>
+              Bulk Marks Entry
+                  <small>Enter Details</small>
+              </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="box box-default">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <label>Programme</label>
+                                            <select name="allstudents" class="form-control bulk-prog" id ="bulk-prog" required>
+                                                <?php
+                                              $query = "SELECT * FROM  programme";
+                                              include '../config/authModule/real-config.php';
+                                              $query_run = mysqli_query($mysqli, $query);
+                                              if (!$query_run) {
+                                                  echo "Query_Run_Error" . mysqli_error($mysqli);
+                                                  } else {
+                                              echo "<option value='none'>--Select--</option>";
+                                              while ($row = mysqli_fetch_array($query_run)) {
+                                                  echo "<option value = '".$row['programmeID']."' ><b>".ucfirst($row['name'])."</option>";   
+
+                                                  }
+                                                  }
+                                              ?>
+
+                                            </select>
+
+                                            <label>Year</label>
+                                            <select class="form-control bulk-year" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Year 1</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 3</option>
+
+                                            </select>
+
+                                            <label>Semester</label>
+                                            <select class="form-control bulky-semester">
+                                                <option value="">--Select--</option>
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                            </select>
+                                            <label>Courseunit</label>
+                                            <select class="form-control bulk-courseunit">
+                                                <!-- JS populate courseunits -->
+                                            </select>
+                                            <div class="">
+                                                <br>
+                                                <button class="btn btn-primary btn-flat  btn-sm bulk-result-entry  spin-load"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                                &nbsp; &nbsp;
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-lg-6 ">
+                        <span class = "badge bg-red"></span>
+                            <section class="content">
+                                <div class = "badge bg-blue program"></div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="box box-primary">
+                                            <div class="modal-alert-wrapper"></div>
+                                            <div class="box-body show-studentsmarks-bulk">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </section>
+      <?php
+  }
+
     ?>

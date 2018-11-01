@@ -71,4 +71,43 @@ $(document).ready(function () {
     $(".updateResult").on('click', function (event) {
       alert('yes');
     });
+
+    //BULKY ENTRY
+    //send request to populate edit courseunits
+	$('.bulky-semester').change(function () {
+        var progId = $(".bulk-prog").val();
+        var bulkYear = $(".bulk-year").val();
+        var bulkSemester = $(this).val();
+
+        console.log("progId-->" + progId);
+        console.log("bulkYear-->" + bulkYear);
+        console.log("bulkSemester-->" + bulkSemester);
+
+        $.ajax({
+            type: 'POST',
+			url: "../config/resultsModule/route.php?call=" + window.btoa("bulk_getCourseunits") + "&id=" + progId + "&year=" + bulkYear + "&semester=" + bulkSemester,
+            success: (data) => {
+                console.log(data);
+                 $(".bulk-courseunit").html(data);
+               
+            }
+        });
+
+    });
+
+    $(".bulk-result-entry").on('click', function (event) {
+        var progId = $(".bulk-prog").val();
+        var bulkYear = $(".bulk-year").val();
+        var bulkSemester = $(this).val();
+        $( ".spin-load" ).addClass( "fa fa-spinner fa-spin" );
+        $.ajax({
+            type: 'POST',
+			url: "../config/resultsModule/route.php?call=" + window.btoa("bulk_loadStudentsMarks") + "&id=" + progId + "&year=" + bulkYear,
+            success: (data) => {
+               // gradeStudent(mark)
+                $(".show-studentsmarks-bulk").html(data);
+                $( ".spin-load" ).removeClass( "fa fa-spinner fa-spin" )
+            }
+        });
+    });
 });
