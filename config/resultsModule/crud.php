@@ -320,8 +320,11 @@ function GradeStudent($mark){
         case $mark >= $fromE:
             echo 'E-';
             break;
-        case $mark = "":
-            echo 'none';
+        case $mark <= $fromF:
+            echo 'F';
+            break;
+        case $mark = 0:
+            echo 'F';
             break;
     }
     

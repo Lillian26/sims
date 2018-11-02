@@ -36,6 +36,11 @@ if (isset($_REQUEST['call'])){
     loadTranscript($id,$year,$semester);
     break;
 
+    case "getStudentDetails":
+    $id = $_GET['id'];
+    getStudent($id);
+    break;
+
     case "GradeStudent":
     $mark = $_REQUEST['mark'];
     GradeStudent($mark);
