@@ -291,7 +291,7 @@ $(document).ready(function () {
 		var selected = $(this).val();
 		$.ajax({
 			type: 'POST',
-			url: "../config/resultsModule/route.php?call=" + window.btoa('getStudent') + "&id=" + selected,
+			url: "../config/resultsModule/route.php?call=" + window.btoa('getStudentDetails') + "&id=" + selected,
 			success: (data) => {
 				var obj = JSON.parse(data);
 				$(".details-pic").html("<img src='../dist/img/user-avatar.png' alt='Student Image' style='width:100px; height:100px;'>");

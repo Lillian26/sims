@@ -133,19 +133,19 @@
                                                 </tr>
                                                 <tr>
                                                     <td>REG NO:</td>
-                                                    <td class="details-regNo"></td>
+                                                    <td class="details-regNo" style = "font-weight:bold;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>STD NO:</td>
-                                                    <td class="details-studentNo"></td>
+                                                    <td class="details-studentNo" style = "font-weight:bold;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>NAME:</td>
-                                                    <td class="details-name"></td>
+                                                    <td class="details-name" style = "font-weight:bold;"></td>
                                                 </tr>
                                                 <tr>
                                                     <td>INTAKE:</td>
-                                                    <td class="details-intake"></td>
+                                                    <td class="details-intake" style = "font-weight:bold;"></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -156,7 +156,7 @@
                                         <table class="pull-left ">
                                             <tr>
                                                 <td>GRADE:</td>
-                                                <td class="gradeStd"></td>
+                                                <td class="gradeStd" style = "font-weight:bold;"></td>
                                             </tr>
                                             <tr>
                                                 <td class="gradePt">GP:</td>
