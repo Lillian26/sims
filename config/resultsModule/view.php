@@ -209,7 +209,7 @@ function singleResult(){
                     <a href='<?php echo ' ?call='.base64_encode('editsingleresult') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Edit Result</a>
                 </div>
                 <div class="col-sm-2">
-                    <button class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</button>
+                    <a href ="http://localhost:9090/sims/lib/academic_report.php?sign=testimonial" target = '_blank' class="btn btn-success btn-flat btn-sm"><i class="fa fa-print"></i>&nbsp;Print</a>
                 </div>
             </div>
         </div>

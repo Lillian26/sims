@@ -21,6 +21,9 @@ if (isset($_REQUEST['token'])){
     case "view_students":
       view_students();
       break;
+    case "advancedSearch":
+      advancedSearch();
+      break;
     case "schDetails":
       schoolDetails();
       break;

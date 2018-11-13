@@ -2794,6 +2794,16 @@
                 <li class="active">Manage</li>
             </ol>
         </section>
+        <div class="row">
+            <div class="col-sm-6 pull-right">
+                <div class="col-sm-2">
+                    <a href='<?php echo ' ?token='.base64_encode('enter_student') ?>' class="btn btn-success btn-flat  btn-sm "><i class="fa fa-plus"></i>&nbsp;Add Student</a>
+                </div>
+                <div class="col-sm-2">
+                    <a href='<?php echo ' ?token='.base64_encode('advancedSearch') ?>' class="btn btn-success btn-flat btn-sm"><i class="fa fa-pencil"></i>&nbsp;Generate Classlist</a>
+                </div>
+            </div>
+        </div>
         <section class="content">
             <div class="row">
                 <div class="col-xs-12">
@@ -3836,5 +3846,110 @@
 
     <?php
 }
+  function advancedSearch(){
+  
+      ?>
+         <!-- Content Header (Page header) -->
+         <section class="content-header">
+                    <h1>
+              Students::Advanced Search
+                  <small>Search</small>
+              </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </section>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box box-default">
+                                <div class="box-body">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+
+                                            <label>Programme</label>
+                                            <select name="allstudents" class="form-control bulk-prog" id ="bulk-prog" required>
+                                                <?php
+                                              $query = "SELECT * FROM  programme";
+                                              include '../config/authModule/real-config.php';
+                                              $query_run = mysqli_query($mysqli, $query);
+                                              if (!$query_run) {
+                                                  echo "Query_Run_Error" . mysqli_error($mysqli);
+                                                  } else {
+                                              echo "<option value='none'>--Select--</option>";
+                                              while ($row = mysqli_fetch_array($query_run)) {
+                                                  echo "<option value = '".$row['programmeID']."' ><b>".ucfirst($row['name'])."</option>";   
+
+                                                  }
+                                                  }
+                                              ?>
+
+                                            </select>
+</div>
+<div class="col-lg-1">
+                                            <label>Intake</label>
+                                            <select class="form-control bulk-year" required>
+                                                <option value="">None</option>
+                                                <option value="1">Year 1</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 3</option>
+
+                                            </select>
+</div>
+<div class="col-lg-1">
+                                            <label>Year</label>
+                                            <select class="form-control bulk-year" required>
+                                                <option value="">Select</option>
+                                                <option value="1">Year 1</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 3</option>
+
+                                            </select>
+</div>
+<div class="col-lg-2">
+                                            <label>Semester</label>
+                                            <select class="form-control bulky-semester">
+                                                <option value="">--Select--</option>
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                            </select>
+                                            </div>
+                                            <div class="col-lg-3">
+                                            <label>Courseunit</label>
+                                            <select class="form-control bulk-courseunit">
+                                                <!-- JS populate courseunits -->
+                                            </select>
+                                            </div>
+                                            
+                                            <div class="col-lg-2" style="margin-top:25px">
+                                              
+                                                <button class="btn btn-primary btn-flat  btn-sm bulk-result-entry  spin-load "><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                                <button class="btn btn-success btn-flat  btn-sm export-students  spin-load  "><i class="fa fa-file-excel-o"></i>&nbsp;Export to Excel</button>
+                                                &nbsp; &nbsp;
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+                        <div class="col-lg-12 ">
+                        <span class = "badge bg-red"></span>
+                            <section class="content">
+                                <div class = "badge bg-blue program"></div>
+                                <div class="row">
+                                    <div class="col-xs-12 " >
+                                       
+                                            
+                                    </div>
+                                </div>
+                        </div>
+                        </section>
+      <?php
+  }
 ?>
 
