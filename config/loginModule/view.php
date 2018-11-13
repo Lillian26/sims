@@ -72,9 +72,9 @@ session_start(); // Our custom secure way of starting a PHP session.
     <a href="../../index2.html"><b>School</b>Monitor</a>
   </div>
   <?php
-  include_once 'config/focus.php';
+  include_once 'config/recordsModule/focus.php';
   if (isset($_POST['new_institute'])) {
-    include 'config/real-config.php';
+    include 'config/authModule//real-config.php';
       $institute_name = $_POST['institution_name'];
       $username = $_POST['username'];
       $password = $_POST['p']; // The hashed password.

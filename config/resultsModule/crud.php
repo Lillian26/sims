@@ -80,7 +80,7 @@ function edit_loadCourseunits($year, $semester, $stdid, $courseunit){
                
                 </tr></table>";
             echo "<label>Comment/Reason For Edit</label><textarea class='form-control editReason' required></textarea><br>";
-            echo "<button  type = 'submit' class='btn btn-success btn-flat btn-sm pull-right '><i class='fa fa-save'></i>&nbsp;Save Changes</button>
+            echo "<button  type = 'submit' class='btn btn-success btn-flat btn-sm pull-right sendm'><i class='fa fa-save'></i>&nbsp;Save Changes</button>
                 </form>";
             
         } else {
@@ -145,32 +145,39 @@ function bulk_getCourseunits($year, $semester, $progid){
 }
 function bulk_loadStudentsMarks($year,$progid){
     $mysqli    = con();
-    $query     = "SELECT * FROM  student WHERE program = '".$progid."' AND yearOfStudy = '".$year."'";
+    $query     = "SELECT * FROM  student WHERE program = '".$progid."' AND yearOfStudy = '".$year."' ORDER BY surname";
     $query_run = mysqli_query($mysqli, $query);
     $num       = mysqli_num_rows($query_run);
     if (!$query_run) {
         echo "Query Run Error" . mysqli_error($mysqli);
     } else {
         if ($num > 0) {
+            echo ' <div class="box box-primary">
+            <div class="modal-alert-wrapper"></div>
+            <div class="box-body ">';
+            echo "
+            <form role='form' id='submitMarksBulk' '>
+            <table class='row-border ' style='width:100%' id = 'example' >
+            <tr>
+                <th> RegNo </th>
+                <th> Student's Name</th>
+                <th> Mark </th>
+            </tr>";
             while($row= mysqli_fetch_array($query_run)){
             $regNo = $row["regNo"];
-            $name = $row["surname"]."".$row["firstName"];
+            $name = strtoupper($row["surname"])." ".$row["firstName"];
             $mark = "";
-            echo "
-                <form role='form' id='updateMark' method=post'>
-                <table class='table table-striped margin-negative-10'>
-                <tr>
-                    <th> RegNo </th>
-                    <th> Student's Name</th>
-                    <th> Mark </th>
-                </tr>";
+          
             echo " <tr>
                 <td> $regNo </td>
                 <td> $name </td>
-                <td> <input type = 'text' value = '$mark' style='float:center;font-size:20px;font-weight:bold;width:50px'  class = 'updated-mark' required> </td></tr></table>";
-            echo "<button  type = 'submit' class='btn btn-success btn-flat btn-sm pull-right '><i class='fa fa-save'></i>&nbsp;Submit Marks</button>
-                </form>";
+                <td> <input type = 'text' value = '$mark' style='float:center;font-size:20px;font-weight:bold;width:50px'  class = 'updated-mark' required> </td></tr>";
+           
             } 
+            
+        echo "</table>
+        <button  type = 'submit' class='btn btn-success btn-flat btn-sm pull-right '><i class='fa fa-save'></i>&nbsp;Submit Marks</button>
+        </form></div></div>";
         } else {
             echo "<option>No Students Found </option>";
         }
@@ -246,7 +253,7 @@ function getAllStudent()
         
     }
 }
-function getGrading() // geting all the the data in the grading table
+function getGrading() // geting all the the data in the grading tabl
 {
     $mysqli    = con();
     $query     = "SELECT * FROM grading";
@@ -323,7 +330,7 @@ function GradeStudent($mark){
         case $mark <= $fromF:
             echo 'F';
             break;
-        case $mark = 0:
+        case $mark == 0:
             echo 'F';
             break;
     }
@@ -533,8 +540,7 @@ function loadTranscript($id, $sel_year, $sel_semester){
         mysqli_close($con);
     }
 }
-function getSemesterName($semester)
-{
+function getSemesterName($semester){
     $sem_name = "";
     if ($semester == "1") {
         $sem_name = "Semester I";
@@ -543,8 +549,7 @@ function getSemesterName($semester)
     }
     return $sem_name;
 }
-function getYearName($year)
-{
+function getYearName($year){
     $year_name = "";
     if ($year == "1") {
         $year_name = "Year 1";
@@ -559,14 +564,12 @@ function getYearName($year)
     }
     return $year_name;
 }
-function getAwardName($program)
-{
+function getAwardName($program){
     $name = "DIPLOMA IN " . $program;
     return $name;
 }
 
-function getAward($cgpa)
-{
+function getAward($cgpa){
     if ($cgpa >= 4.5) {
         $award = "Class I (Distinction)";
     } else if ($cgpa >= 3.5) {
@@ -580,7 +583,6 @@ function getAward($cgpa)
 }
 function getGP($grade){
     $strvar = settype($grade, 'string');
-    ;
     $mysqli    = con();
     $query     = "SELECT * FROM grading WHERE grade = '" . $strvar . "'";
     $query_run = mysqli_query($mysqli, $query);

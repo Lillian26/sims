@@ -27,8 +27,37 @@ $(document).ready(function () {
 				}
 			});
 		});
+    }
+    function listen_getGrade(formClass){
+		$("." + formClass + "").keyup(function () {
+			var mark = $(this).val();
+			if (mark > 100) {
+				alert("Mark cant be greater than 100");
+				$(".final-mark").val("");
+				$(".gradeStd").val("");
+			}
+			console.log(mark);
+	
+			if (mark == "" || mark == null) {
+				$(".gradeStd").html('None');
+			} else {
+				$.ajax({
+					type: 'POST',
+					url: "../config/resultsModule/route.php?call=" + window.btoa('GradeStudent') + "&mark=" + mark,
+					success: (data) => {
+						//  var obj = JSON.parse(data);
+						console.log(data);
+						$(".gradeStd").html(data);
+						$(".gradeT").val(data);
+						$(".cuT").val('');
+					}
+				});
+			}
+		});
 	}
-
+  /**
+     * END FUNCTIONS
+     */
     //send request to populate edit courseunits
 	$('.edit-semester').change(function () {
         var studentId = $(".edit-allstudents").val();
@@ -68,8 +97,10 @@ $(document).ready(function () {
         });
     });
     
-    $(".updateResult").on('click', function (event) {
-      alert('yes');
+    $("#updateSingleResult").on('submit', function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        alert(data);
     });
 
     //BULKY ENTRY
@@ -109,5 +140,14 @@ $(document).ready(function () {
                 $( ".spin-load" ).removeClass( "fa fa-spinner fa-spin" )
             }
         });
+    });
+
+    $(".editReason").keyup(function () {
+        console.log('yess');
+    });
+    $("#submitMarksBulk").on('submit', function (event) {
+        event.preventDefault();
+        var data = $(this).serialize();
+        alert(data);
     });
 });

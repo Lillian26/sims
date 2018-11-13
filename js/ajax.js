@@ -143,7 +143,7 @@ $(document).ready(function () {
 
 	/* On saving an academic settings component item changes */
 	function saveItemEdits(formId, handler) {
-		$("#" + formId + "").on('submit', function (event) {
+		$("#updateSingleResult").on('submit', function (event) {
 			event.preventDefault();
 			var data = $(this).serialize();
 			$.ajax({
@@ -299,6 +299,7 @@ $(document).ready(function () {
 				$(".details-regNo").html(obj['regNo']);
 				$(".details-intake").html(obj['academicyearEntry']);
 				$(".details-studentNo").html(obj['studentNo']);
+		
 			}
 		});
 	});
