@@ -158,14 +158,7 @@
                                                 <td>GRADE:</td>
                                                 <td class="gradeStd" style = "font-weight:bold;"></td>
                                             </tr>
-                                            <tr>
-                                                <td class="gradePt">GP:</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>CU:</td>
-                                                <td></td>
-                                            </tr>
+  
                                         </table>
                                         <div>
                                             <input type="hidden" class="form-control" value="<?php echo $user ?>" name="lecturer">
@@ -319,7 +312,6 @@ function EditSingleResult(){
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-
                                             <label>Student</label>
                                             <select name="allstudents" class="form-control edit-allstudents" required>
                                                 <?php
@@ -406,11 +398,11 @@ function EditSingleResult(){
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-12">
                             <div class="box box-default">
                                 <div class="box-body">
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-3">
 
                                             <label>Programme</label>
                                             <select name="allstudents" class="form-control bulk-prog" id ="bulk-prog" required>
@@ -430,7 +422,8 @@ function EditSingleResult(){
                                               ?>
 
                                             </select>
-
+</div>
+<div class="col-lg-2">
                                             <label>Year</label>
                                             <select class="form-control bulk-year" required>
                                                 <option value="">Select</option>
@@ -439,22 +432,26 @@ function EditSingleResult(){
                                                 <option value="3">Year 3</option>
 
                                             </select>
-
+</div>
+<div class="col-lg-2">
                                             <label>Semester</label>
                                             <select class="form-control bulky-semester">
                                                 <option value="">--Select--</option>
                                                 <option value="1">Semester 1</option>
                                                 <option value="2">Semester 2</option>
                                             </select>
+                                            </div>
+                                            <div class="col-lg-3">
                                             <label>Courseunit</label>
                                             <select class="form-control bulk-courseunit">
                                                 <!-- JS populate courseunits -->
                                             </select>
-                                            <div class="">
-                                                <br>
-                                                <button class="btn btn-primary btn-flat  btn-sm bulk-result-entry  spin-load"><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
+                                            </div>
+                                            
+                                            <div class="col-lg-2" style="margin-top:25px">
+                                              
+                                                <button class="btn btn-primary btn-flat  btn-sm bulk-result-entry  spin-load "><i class="fa fa-arrow-right"></i>&nbsp;Go</button>
                                                 &nbsp; &nbsp;
-
                                             </div>
                                         </div>
                                     </div>
@@ -465,17 +462,14 @@ function EditSingleResult(){
 
                         </div>
                         
-                        <div class="col-lg-6 ">
+                        <div class="col-lg-12 ">
                         <span class = "badge bg-red"></span>
                             <section class="content">
                                 <div class = "badge bg-blue program"></div>
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="box box-primary">
-                                            <div class="modal-alert-wrapper"></div>
-                                            <div class="box-body show-studentsmarks-bulk">
-                                            </div>
-                                        </div>
+                                    <div class="col-xs-12 show-studentsmarks-bulk" >
+                                       
+                                            
                                     </div>
                                 </div>
                         </div>

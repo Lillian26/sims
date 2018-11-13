@@ -239,6 +239,11 @@ ob_start();
             <li><a href=""><i class="fa fa-circle-o"></i> Lecturers</a></li>
           </ul>
         </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-key"></i> <span>E-Auth</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-file-o"></i>
@@ -285,6 +290,7 @@ ob_start();
               </a>
               <ul class="treeview-menu">
               <li><a href="?token=dXBkYXRlSW5zdERldGFpbHM"><i class="fa fa-circle-o"></i>Institute Details</a></li>
+              <li><a href="?token=dXBkYXRlSW5zdERldGFpbHM"><i class="fa fa-circle-o"></i>Academic Session</a></li>
                 <li><a href="<?php echo '?token='.base64_encode('manageUsers') ?>"><i class="fa fa-circle-o"></i>System Users </a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i>License</a></li>
               </ul>
@@ -556,21 +562,12 @@ ob_start();
       'info'        : true,
       'autoWidth'   : false
     })
-        //iCheck for checkbox and radio inputs
-    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-      checkboxClass: 'icheckbox_minimal-blue',
-      radioClass   : 'iradio_minimal-blue'
-    })
-    //Red color scheme for iCheck
-    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-      checkboxClass: 'icheckbox_minimal-red',
-      radioClass   : 'iradio_minimal-red'
-    })
-    //Flat red color scheme for iCheck
-    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-      checkboxClass: 'icheckbox_flat-green',
-      radioClass   : 'iradio_flat-green'
-    })
+
+    $('#example').DataTable( {
+        scrollY:        '50vh',
+        scrollCollapse: true,
+        paging:         false
+    } );
   })
 
 </script>

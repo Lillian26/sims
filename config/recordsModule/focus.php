@@ -16,7 +16,7 @@ function msg_success($msgHeader, $msgContent) {
 }
 function new_institution($institute_name, $instNo, $usraccNo, $username, $password_hash, $email, $phone_no, $key, $timestamp) {
     //inserting | Institute Details
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if ($mysqli->query("INSERT INTO institute (institute_name,pro_key,institute_no)VALUES ('" . $institute_name . "','" . $key . "','" . $instNo . "')")) {
         return true;
         if ($inst = $mysqli->prepare("SELECT id, institute_name FROM institute WHERE institute_no = ? LIMIT 1")) {
@@ -63,7 +63,7 @@ function viewUsers() {
     }
 }
 function check_serial($key) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM ethusiast WHERE s_key = '" . $key . "' AND s_status = 'A'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -80,7 +80,7 @@ function check_serial($key) {
     }
 }
 function check_inst($inst_name) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM institute WHERE institute_name = '" . $inst_name . "'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -96,7 +96,7 @@ function check_inst($inst_name) {
 }
 
 function check_program($program_code) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM programme WHERE code = '" . $program_code . "'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -111,7 +111,7 @@ function check_program($program_code) {
     }
 }
 function check_course($course) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM courseunit WHERE courseunitCode = '" . $course . "'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -266,7 +266,7 @@ function register_student() {
     }
     /************inserting data*******************/
     /**START  TRANSACTION **/
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     mysqli_autocommit($mysqli, FALSE);
     //Queries to execute
     $studentbio_query = $mysqli->query("INSERT INTO `student` (`id`, `regNo`, `studentNo`, `surname`, `firstName`, `gender`, `maritalStatus`, `photo`, `dob`, `nationality`, `hallOfResidence`, `religion`, `notes`, `medicalProblem`, `medicalInformation`, `telNo`, `address`, `yearOfStudy`, `placeOfResidence`, `email`, `academicyearEntry`, `dateOfAdmission`, `gradDate`, `entryScheme`, `dateofcompletion`, `program`, `status`, `uceSchool`, `uaceSchool`, `uceAggregates`, `uacePoints`, `formerInstitution`, `formerQualification`, `formerYearCourse`, `formerRegNo`, `promotionalStatus`, `courseDuration`, `reason`, `uceIndex`, `uaceIndex`, `institutionReg`, `yearOfCourse`, `yearOfUace`,`yearOfUCE`,`sponsorshipType`, `enteredOn`, `enteredBy`, `updatedOn`, `updatedBy`) VALUES (NULL, '" . $reg_no . "', '" . $studentNo . "', '" . $sname . "', '" . $fname . "', '" . $gender . "', '" . $marital_status . "', '" . $newFilename . "', '" . $dob . "', '" . $nationality . "', '" . $hall . "', '" . $religion . "', '', '', '" . $medicalProblemDesc . "', '" . $phoneno  . "', NULL, '" . $academicYearEntry . "', '" . $residence . "', '" . $email . "', '" . $academicYearEntry . "', '" . $dateAdmission . "', '" . $gradDate . "', '" . $entry_scheme . "', NULL, '" . $program . "', '" . $student_type . "', '" . $olevelsch . "', '" . $alevelsch . "', NULL, NULL, '" . $formerInst . "', '" . $formerQual . "','" . $formerYrCourse . "','" . $formerRegNo . "',NULL,NULL, NULL, '" . $olevelindex . "', '" . $alevelindex . "', NULL, '', '" . $alevelyr . "', '" . $olevelyr . "', '', '', '', '', '')");
@@ -315,7 +315,7 @@ function insert_programme(){
     $duration = $_POST['duration'];
     $gradLoad = $_POST['gradLoad'];
     $code = $_POST['code'];
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if (check_program($code) == false) {
         if ($mysqli->query("INSERT INTO `programme` (`name`, `category`,`duration`, `gradLoad`, `code`, `action`) VALUES (
         '" . $name . "',
@@ -335,7 +335,7 @@ function insert_programme(){
     }
 }
 function update_programme($id,$name,$category,$duration,$gradLoad,$code) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if(check_program($code) == false){
         if ($mysqli->query("UPDATE `programme` SET name = '" . $name . "',category = '" . $category . "',duration =  '" . $duration . "',gradLoad =   '" . $gradLoad . "',code =  '" . $code . "' WHERE programmeID = '" . $id . "'")) {
             msg_success('Operation Successful', 'Programme Updated');
@@ -356,7 +356,7 @@ function insert_course() {
     $code = $_POST['code'];
     $programme = $_POST['programmeID'];
     // echo "lllllllllllllllll".$inst_id;
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if (check_course($code) == true) {
         if ($mysqli->query("INSERT INTO `courseunit` (`name`, `semesterOffered`,`yearOffered`, `creditUnits`,`courseunitCode`,`programme_programmeID`) VALUES (
         '" . $name . "',
@@ -383,7 +383,7 @@ function update_course($id) {
     $code = $_POST['code'];
     $programme = $_POST['programmeID'];
     // echo "lllllllllllllllll".$inst_id;
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if ($mysqli->query("UPDATE `courseunit` SET 
   name =   '" . $name . "',
     semesterOffered = '" . $semester . "',
@@ -399,7 +399,7 @@ function update_course($id) {
         }
     }
 function update_student($id) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     //Biodata
     $rand = rand(1000, 20000);
     $studentNo = $_POST['student_no'];
@@ -500,7 +500,7 @@ function update_student($id) {
     }
     /************inserting data*******************/
     /**START  TRANSACTION **/
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     mysqli_autocommit($mysqli, FALSE);
     //Queries to execute
  
@@ -558,7 +558,7 @@ function update_student($id) {
 
 /* pull a particular program data */
 function programData($id){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
 
     $query= "SELECT * FROM programme  WHERE programmeID = '".$id."'";
     $query_run= mysqli_query($mysqli, $query);
@@ -572,7 +572,7 @@ function programData($id){
 
 /* delete a programme */
 function delete_programme($id){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
 
     $query= "DELETE FROM `programme` WHERE programmeID = '".$id."'";
     $query_run = mysqli_query($mysqli, $query);
@@ -585,7 +585,7 @@ function delete_programme($id){
 
 /* Check for a college */
 function check_college($shortname,$fullname) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM college WHERE fullname = '".$fullname."' and shortname = '".$shortname."'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -602,7 +602,7 @@ function check_college($shortname,$fullname) {
 
 /* Inserting a College */
 function insert_college($shortname,$fullname){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if (check_college($shortname,$fullname) == false) {
         if ($mysqli->query("INSERT INTO `college` (`fullname`, `shortname`) VALUES ('" . $fullname . "','" . $shortname . "');")) {
             msg_success('Operation Successful', 'College Added');
@@ -617,7 +617,7 @@ function insert_college($shortname,$fullname){
 
 /* pull a particular college data */
 function collegeData($id){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
 
     $query= "SELECT * FROM college  WHERE collegeId = '".$id."'";
     $query_run= mysqli_query($mysqli, $query);
@@ -631,7 +631,7 @@ function collegeData($id){
 
 /* Update a particular college data */
 function update_college($id,$shortname,$fullname){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if(check_college($shortname,$fullname) == false){
         if ($mysqli->query("UPDATE `college` SET fullname = '".$fullname."',shortname = '".$shortname."' WHERE collegeId = '" . $id . "'")) {
             msg_success('Operation Successful', 'Programme Updated');
@@ -647,7 +647,7 @@ function update_college($id,$shortname,$fullname){
 
 /* delete a College */
 function delete_college($id){
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
 
     $query= "DELETE FROM `college` WHERE collegeId = '".$id."'";
     $query_run = mysqli_query($mysqli, $query);
@@ -659,7 +659,7 @@ function delete_college($id){
 }
 /* Check if Depatment exists */
 function check_dep($shortname) {
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     $query = "SELECT * FROM department WHERE `code` = '".$shortname."'";
     $query_run = mysqli_query($mysqli, $query);
     if (!$query_run) {
@@ -679,7 +679,7 @@ function insert_dep(){
     $shortname = $_POST['code'];
     $fullname = $_POST['name'];
     $college_id = $_POST['college'];
-    include '../config/authModule/real-config.php';
+    include 'config/authModule/real-config.php';
     if (check_dep ($shortname) == false) {
         if ($mysqli->query("INSERT INTO `department` (`name`, `code`, `college_collegeId` ) VALUES ('" . $fullname . "','" . $shortname . "','" . $college_id . "');")) {
             msg_success('Operation Successful', 'Department Added');
