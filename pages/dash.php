@@ -64,7 +64,7 @@ ob_start();
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<body class="hold-transition skin-blue sidebar-mini ">
 <div class="wrapper">
 
   <header class="main-header">
@@ -144,8 +144,6 @@ ob_start();
           
             if(login_check($mysqli) == true){
             $id = getfield('institute_instituteID',$mysqli);
-      
-            
             }else{
               header('Location: http://localhost:9090/sims/?this=dXNldGhpc3RvbG9naW4=');
             } 
@@ -195,8 +193,8 @@ ob_start();
           <ul class="treeview-menu">
             <li><a href="<?php echo '?call='.base64_encode('entermarks') ?>"><i class="fa fa-circle-o"></i>Add Result</a></li>
             <li><a href="<?php echo '?call='.base64_encode('singleResult') ?>"><i class="fa fa-circle-o"></i> View Single Result</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> View All Result</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> View All Marksheet</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> View All Result</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> View All Marksheet</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -208,11 +206,11 @@ ob_start();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i>Setup fee applicable</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Create Invoice</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Add fee Received</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Add Scholarship</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i>Student Finacial Statement</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i>Setup fee applicable</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Create Invoice</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Add fee Received</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Add Scholarship</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i>Student Finacial Statement</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -234,13 +232,13 @@ ob_start();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i> Individual</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Students</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Lecturers</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Individual</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Students</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Lecturers</a></li>
           </ul>
         </li>
         <li>
-          <a href="#">
+          <a href="<?php echo '?token='.base64_encode('pageNotfound') ?>">
             <i class="fa fa-key"></i> <span>E-Auth</span>
           </a>
         </li>
@@ -253,9 +251,9 @@ ob_start();
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href=""><i class="fa fa-circle-o"></i>All Students</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Approved</a></li>
-            <li><a href=""><i class="fa fa-circle-o"></i> Waiting List</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i>All Students</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Approved</a></li>
+            <li><a href="<?php echo '?token='.base64_encode('pageNotfound') ?>"><i class="fa fa-circle-o"></i> Waiting List</a></li>
           </ul>
         </li>
         <li class="treeview">

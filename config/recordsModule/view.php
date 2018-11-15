@@ -1,6 +1,20 @@
 
 <?php
-   
+   function pageNotfound(){
+?>
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block" style="font-size:70px">404</span>
+                <div class="mb-4 lead">The page you are looking for was not found.</div>
+                <a href="http://localhost:9090/sims/pages/dash.php?token=ZGFzaGJvYXJk" class="btn btn-link">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+   }
    function dashboard()
    {
     ?>
@@ -600,7 +614,7 @@
         </section>
 <?php
    }
-   function pagenotfound()
+   function page9notfound()
    {
     ?>
         <section class="content-header">
@@ -851,8 +865,22 @@
                     <?php
                         if (isset($_POST['enter_student'])) {
                                 include 'focus.php';
+                                $regNo = $_POST['reg_no'];
+                                $student_no = $_POST['student_no'];
+                                echo $regNo."--".$student_no;
+                        if(checkExists_stdNo($_POST['student_no']) == FALSE){     
+                            if(checkExists_RegNo($regNo) == FALSE){
                                 register_student();
+                                
+                            }else{
+                                msg_error('Error', 'Duplicate Registration Number');
+
                             }
+                        }else{
+                                msg_error('Error', 'Duplicate Student Number'); 
+                            }
+                        }
+                            
                     ?>
                     <form method ="post" role="form"  enctype="multipart/form-data">
                         <div class="panel panel-default">
@@ -980,8 +1008,24 @@
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                        <label>Programme Code</label>
-                                        <input class="form-control" placeholder="BBA" name="programcode" disabled>
+                                        <label>Campus/Center</label>
+                                        <select name="program" class="form-control">
+                                        <?php
+                                            $query = "SELECT * FROM  campus";
+                                            include '../config/authModule/real-config.php';
+                                            $query_run = mysqli_query($mysqli, $query);
+                                            if (!$query_run) {
+                                                echo "Query_Run_Error" . mysqli_error($mysqli);
+                                                } else {
+                                            echo "<option value=''>--Select--</option>";
+                                            while ($row = mysqli_fetch_array($query_run)) {
+                                                echo "
+                                                    <option value='".$row['id']."'>".$row['centerName']."</option>
+                                                ";   
+                                                }
+                                                }
+                                            ?> 
+                                        </select>
                                         <label>Date of Graduation</label>
                                         <input type= "date" class="form-control"  name="gradDate">
                                         </div>

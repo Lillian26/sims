@@ -16,4 +16,4 @@
         
         // Destroy session 
         session_destroy();
-        header('Location:/sims/?this=dXNldGhpc3RvbG9naW4=');
+        header('Location:/sims/');

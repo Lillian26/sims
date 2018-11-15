@@ -28,10 +28,68 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+<body class="hold-transition login-page">
+<div class="login-box" >
+  <div class="login-logo">
+    <a href="index.php"><b>School</b>Monitor</a>
+    <br><h2 style="font-size:12px"><b>Version 1.0</h2></b>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
 
-<?php
-include 'config/loginModule/route.php';
+    <form method="post">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Username" name="username">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="Password" name="p">
+        <span class="glyphicon glyphicon-lock form-control-feedback" ></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type ="submit" class="btn btn-primary btn-block btn-flat" name="login">Sign In</buttona>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    <!-- /.social-auth-links -->
+
+    <a href="#">I forgot my password</a><br>
+    <a href="<?php echo '?this='.base64_encode('usethistoregister')?>" class="text-center">Register Institution</a>
+
+  </div>
+  </div>
+  <?php
+  include_once 'config/authModule/sh-config.php';
+  include_once 'config/authModule/real-config.php';
+include_once 'config/loginModule/login-func.php';
+include 'config/recordsModule/focus.php';
+  session_start(); // Our custom secure way of starting a PHP session.
+  if (isset($_POST['username'], $_POST['p'])) {
+      $username = $_POST['username'];
+      $password = $_POST['p']; // The hashed password.
+   
+      if (login($username, $password, $mysqli) == true) {
+          // Login success 
+          header('Location: ./pages/dash.php?token=ZGFzaGJvYXJk');
+      } else {
+          // Login failed 
+          $msg = msg_error('Login Failed','Wrong Password or Username. Please Try Again');
+          echo  $msg;
+      }
+  }
 ?>
+  
   <!-- /.login-box-body -->
 
 <!-- /.login-box -->

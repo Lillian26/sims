@@ -9,6 +9,9 @@ if (isset($_REQUEST['token'])){
   $signing = base64_decode($_REQUEST['token']);
 
   switch($signing){
+    case "pageNotfound":
+    pageNotfound();
+      break;
     case "dashboard":
       dashboard();
       break;

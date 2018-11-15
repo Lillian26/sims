@@ -7,6 +7,11 @@
 if (isset($_REQUEST['call'])){
   $signing = base64_decode($_REQUEST['call']);
   switch($signing){
+
+    case "pageNotfound":
+    pageNotfound();
+      break;
+      
     case "entermarks":
       entermarks();
       break;
